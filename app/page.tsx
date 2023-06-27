@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-center bg-slate-200 font-poppins">
-        <div className="bg-white rounded-xl rounded-br-[200px] p-8">
+        <div className="bg-white rounded-2xl rounded-br-[200px] p-8">
           <form
             onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               e.preventDefault()
@@ -47,28 +47,34 @@ export default function Home() {
             className=" font-bold"
           >
             <div className="flex gap-6 ">
-              <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest text-gray-400">DAY</label>
+              <div className="flex flex-col gap-2 ml-2">
+                <label className="text-xs tracking-widest text-gray-400">
+                  DAY
+                </label>
                 <input
-                  className="w-32 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
+                  className="w-28 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
                   name="day"
                   id="day"
                   placeholder="DD"
                 ></input>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest text-gray-400">MONTH</label>
+                <label className="text-xs tracking-widest text-gray-400">
+                  MONTH
+                </label>
                 <input
-                  className="w-32 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
+                  className="w-28 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
                   name="month"
                   id="year"
                   placeholder="MM"
                 ></input>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest text-gray-400">YEAR</label>
+                <label className="text-xs tracking-widest text-gray-400">
+                  YEAR
+                </label>
                 <input
-                  className="w-32 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
+                  className="w-28 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
                   name="year"
                   id="year"
                   placeholder="YYYY"
@@ -86,20 +92,20 @@ export default function Home() {
               </button>
             </div>
           </form>
-          <div className="flex flex-col gap-4 text-xl bold ">
-            <div className="flex gap-4 items-center">
+          <div className="flex flex-col gap-4 ml-2 text-xl bold ">
+            <div className="flex gap-2 items-center">
               <span className="text-purple-500 text-7xl">
                 {elapsed.years ? elapsed.years : '- -'}
               </span>
-              <span className="font-extrabold text-7xl ">years</span>
+              <span className=" text-7xl ">years</span>
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-2 items-center">
               <span className="text-purple-500 text-7xl">
                 {elapsed.months ? elapsed.months : '- -'}
               </span>
               <span className="text-7xl ">months</span>
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-2 items-center">
               <span className="text-purple-500 text-7xl">
                 {elapsed.days ? elapsed.days : '- -'}
               </span>
