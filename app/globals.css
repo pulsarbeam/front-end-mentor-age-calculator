@@ -5,11 +5,27 @@
 
 @font-face {
   font-family: 'Poppins';
-  src: url('/fonts/Poppins-Regular.ttf');
+  src: url('assets/fonts/Poppins-bold.ttf');
+  font-weight: bold;
+  font-style: normal;
 
 }
 @font-face {
   font-family: 'Poppins';
-  src: url('/fonts/Poppins-ExtraBoldItalic.ttf');
+  src: url('assets/fonts/Poppins-ExtraBoldItalic.ttf');
+  font-weight: bold;
+  font-style: italic;
 
+}
+
+.regular {
+  font-family: 'Poppins';
+  font-weight: bold;
+  font-style: normal;
+}
+
+.bold {
+  font-family: 'Poppins';
+  font-weight: bold;
+  font-style: italic;
 }
