@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Footer from './Footer'
 
 export default function Home() {
   const [elapsed, setElapsed] = useState<{
@@ -65,8 +66,8 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-slate-200 font-poppins">
-        <div className="bg-white rounded-2xl lg:rounded-br-[200px] rounded-br-[100px] lg:p-8 p-6">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-slate-200 ">
+        <div className="bg-white rounded-2xl lg:rounded-br-[200px] rounded-br-[100px] lg:p-8 p-6 font-poppins">
           <form onSubmit={handleSubmit} className="font-bold">
             <div className="flex lg:gap-6 gap-3 justify-center lg:justify-normal">
               <div
@@ -167,6 +168,9 @@ export default function Home() {
               <span className="lg:text-7xl text-5xl">days</span>
             </div>
           </div>
+        </div>
+        <div className="lg:w-[1000px] ">
+          <Footer />
         </div>
       </main>
     </>
