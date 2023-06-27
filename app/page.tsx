@@ -1,4 +1,5 @@
 'use client'
+
 import { useState } from 'react'
 
 export default function Home() {
@@ -11,70 +12,122 @@ export default function Home() {
     months: undefined,
     years: undefined,
   })
-  const daysInMonth = (month: number, year: number): number => {
-    return new Date(year, month + 1, 0).getDate()
+  const [filled, setFilled] = useState(true)
+  const [validDate, isValidDate] = useState(true)
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const { day, month, year } = Object.fromEntries(formData)
+
+    if (!day || !month || !year) {
+      // Empty fields
+      setFilled(false)
+      isValidDate(true)
+      return
+    } else {
+      setFilled(true)
+    }
+
+    const inputDate = new Date(`${year}-${month}-${day}`)
+
+    const currentDate = new Date()
+
+    if (inputDate > currentDate || isNaN(inputDate.getTime())) {
+      // Invalid date
+      setFilled(true)
+      isValidDate(false)
+      setElapsed({
+        days: undefined,
+        months: undefined,
+        years: undefined,
+      })
+      return
+    } else {
+      isValidDate(true)
+    }
+
+    let yearsDiff = currentDate.getFullYear() - inputDate.getFullYear()
+    let monthsDiff = currentDate.getMonth() - inputDate.getMonth()
+    let daysDiff = currentDate.getDate() - inputDate.getDate()
+
+    if (monthsDiff < 0 || (monthsDiff === 0 && daysDiff < 0)) {
+      yearsDiff--
+      monthsDiff += 12
+    }
+
+    setElapsed({
+      days: daysDiff,
+      months: monthsDiff,
+      years: yearsDiff,
+    })
   }
 
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-center bg-slate-200 font-poppins">
         <div className="bg-white rounded-2xl rounded-br-[200px] p-8">
-          <form
-            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-              e.preventDefault()
-              const formData = new FormData(e.currentTarget)
-              const { day, month, year } = Object.fromEntries(formData)
-
-              const inputDate = new Date(`${year}-${month}-${day}`)
-              const currentDate = new Date()
-
-              let yearsDiff =
-                currentDate.getFullYear() - inputDate.getFullYear()
-              let monthsDiff = currentDate.getMonth() - inputDate.getMonth()
-              let daysDiff = currentDate.getDate() - inputDate.getDate()
-
-              if (monthsDiff < 0 || (monthsDiff === 0 && daysDiff < 0)) {
-                yearsDiff--
-                monthsDiff += 12
-              }
-
-              setElapsed({
-                days: daysDiff,
-                months: monthsDiff,
-                years: yearsDiff,
-              })
-            }}
-            className=" font-bold"
-          >
+          <form onSubmit={handleSubmit} className="font-bold">
             <div className="flex gap-6 ">
-              <div className="flex flex-col gap-2 ml-2">
-                <label className="text-xs tracking-widest text-gray-400">
+              <div
+                className="flex flex-col gap-2 ml-2"
+                style={{ height: '74px' }}
+              >
+                <label
+                  className={`text-xs tracking-widest ${
+                    validDate && filled ? 'text-gray-400' : 'text-red-500'
+                  } `}
+                >
                   DAY
                 </label>
                 <input
-                  className="w-28 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
+                  className={`w-28 py-2 px-4 border ${
+                    validDate ? 'border-gray-400' : 'border-red-500'
+                  } rounded-lg text-2xl`}
                   name="day"
                   id="day"
                   placeholder="DD"
                 ></input>
+                {!validDate && (
+                  <span className="text-red-500 text-[10px]">
+                    Must be a valid date
+                  </span>
+                )}
+                {!filled && (
+                  <span className="text-red-500 text-[10px]">
+                    Please fill all fields
+                  </span>
+                )}
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest text-gray-400">
+                <label
+                  className={`text-xs tracking-widest ${
+                    validDate && filled ? 'text-gray-400' : 'text-red-500'
+                  } `}
+                >
                   MONTH
                 </label>
                 <input
-                  className="w-28 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
+                  className={`w-28 py-2 px-4 border ${
+                    validDate ? 'border-gray-400' : 'border-red-500'
+                  } rounded-lg text-2xl`}
                   name="month"
                   id="year"
                   placeholder="MM"
                 ></input>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-xs tracking-widest text-gray-400">
+                <label
+                  className={`text-xs tracking-widest ${
+                    validDate && filled ? 'text-gray-400' : 'text-red-500'
+                  } `}
+                >
                   YEAR
                 </label>
                 <input
-                  className="w-28 py-2 px-4 border border-gray-400 rounded-lg text-2xl "
+                  className={`w-28 py-2 px-4 border ${
+                    validDate ? 'border-gray-400' : 'border-red-500'
+                  } rounded-lg text-2xl`}
                   name="year"
                   id="year"
                   placeholder="YYYY"
@@ -83,7 +136,7 @@ export default function Home() {
             </div>
             <div className="relative">
               <hr className="border-b-gray-400 my-10 w-[35rem]" />
-              <button className=" absolute right-0 -top-10 h-20 w-20 rounded-full bg-purple-600">
+              <button className="absolute right-0 -top-10 h-20 w-20 rounded-full bg-[#854dff]">
                 <img
                   src="/icon-arrow.svg"
                   alt="arrow"
@@ -92,24 +145,24 @@ export default function Home() {
               </button>
             </div>
           </form>
-          <div className="flex flex-col gap-4 ml-2 text-xl bold ">
+          <div className="flex flex-col gap-4 ml-2 text-xl font-bold">
             <div className="flex gap-2 items-center">
-              <span className="text-purple-500 text-7xl">
+              <span className="text-[#854dff] text-7xl">
                 {elapsed.years ? elapsed.years : '- -'}
               </span>
-              <span className=" text-7xl ">years</span>
+              <span className="text-7xl">years</span>
             </div>
             <div className="flex gap-2 items-center">
-              <span className="text-purple-500 text-7xl">
+              <span className="text-[#854dff] text-7xl">
                 {elapsed.months ? elapsed.months : '- -'}
               </span>
-              <span className="text-7xl ">months</span>
+              <span className="text-7xl">months</span>
             </div>
             <div className="flex gap-2 items-center">
-              <span className="text-purple-500 text-7xl">
+              <span className="text-[#854dff] text-7xl">
                 {elapsed.days ? elapsed.days : '- -'}
               </span>
-              <span className="text-7xl  ">days</span>
+              <span className="text-7xl">days</span>
             </div>
           </div>
         </div>
