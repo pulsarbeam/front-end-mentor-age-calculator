@@ -66,11 +66,11 @@ export default function Home() {
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-center bg-slate-200 font-poppins">
-        <div className="bg-white rounded-2xl rounded-br-[200px] p-8">
+        <div className="bg-white rounded-2xl lg:rounded-br-[200px] rounded-br-[100px] lg:p-8 p-6">
           <form onSubmit={handleSubmit} className="font-bold">
-            <div className="flex gap-6 ">
+            <div className="flex lg:gap-6 gap-3 justify-center lg:justify-normal">
               <div
-                className="flex flex-col gap-2 ml-2"
+                className="flex flex-col gap-2 ml-2 "
                 style={{ height: '74px' }}
               >
                 <label
@@ -81,20 +81,20 @@ export default function Home() {
                   DAY
                 </label>
                 <input
-                  className={`w-28 py-2 px-4 border ${
+                  className={`lg:w-28 w-[83px] py-2 px-4 border ${
                     validDate ? 'border-gray-400' : 'border-red-500'
-                  } rounded-lg text-2xl`}
+                  } rounded-lg text-l lg:text-2xl`}
                   name="day"
                   id="day"
                   placeholder="DD"
                 ></input>
                 {!validDate && (
-                  <span className="text-red-500 text-[10px]">
+                  <span className="text-red-500 text-[9px] lg:text-[11px] italic">
                     Must be a valid date
                   </span>
                 )}
                 {!filled && (
-                  <span className="text-red-500 text-[10px]">
+                  <span className="text-red-500 text-[9px] lg:text-[11px] italic ">
                     Please fill all fields
                   </span>
                 )}
@@ -108,9 +108,9 @@ export default function Home() {
                   MONTH
                 </label>
                 <input
-                  className={`w-28 py-2 px-4 border ${
+                  className={`lg:w-28 w-[83px] py-2 px-4 border ${
                     validDate ? 'border-gray-400' : 'border-red-500'
-                  } rounded-lg text-2xl`}
+                  } rounded-lg text-l lg:text-2xl`}
                   name="month"
                   id="year"
                   placeholder="MM"
@@ -125,44 +125,46 @@ export default function Home() {
                   YEAR
                 </label>
                 <input
-                  className={`w-28 py-2 px-4 border ${
+                  className={`lg:w-28 w-[83px] py-2 px-4 border ${
                     validDate ? 'border-gray-400' : 'border-red-500'
-                  } rounded-lg text-2xl`}
+                  } rounded-lg text-l lg:text-2xl`}
                   name="year"
                   id="year"
                   placeholder="YYYY"
                 ></input>
               </div>
             </div>
-            <div className="relative">
-              <hr className="border-b-gray-400 my-10 w-[35rem]" />
-              <button className="absolute right-0 -top-10 h-20 w-20 rounded-full bg-[#854dff]">
-                <img
-                  src="/icon-arrow.svg"
-                  alt="arrow"
-                  className="h-10 w-10 m-auto"
-                />
-              </button>
+            <div className="py-6">
+              <div className="relative">
+                <hr className="border-b-gray-400 my-10 lg:w-[35rem]" />
+                <button className="absolute lg:right-0 right-28 lg:-top-10 -top-8 h-16 w-16 lg:h-20 lg:w-20 rounded-full bg-[#854dff]">
+                  <img
+                    src="/icon-arrow.svg"
+                    alt="arrow"
+                    className="h-8 w-8 lg:w-10 lg:h-10 m-auto"
+                  />
+                </button>
+              </div>
             </div>
           </form>
-          <div className="flex flex-col gap-4 ml-2 text-xl font-bold">
+          <div className="flex flex-col gap-4 ml-2 text-xl bold ">
             <div className="flex gap-2 items-center">
-              <span className="text-[#854dff] text-7xl">
+              <span className="text-[#854dff] lg:text-7xl text-5xl">
                 {elapsed.years ? elapsed.years : '- -'}
               </span>
-              <span className="text-7xl">years</span>
+              <span className="lg:text-7xl text-5xl">years</span>
             </div>
             <div className="flex gap-2 items-center">
-              <span className="text-[#854dff] text-7xl">
+              <span className="text-[#854dff] lg:text-7xl text-5xl">
                 {elapsed.months ? elapsed.months : '- -'}
               </span>
-              <span className="text-7xl">months</span>
+              <span className="lg:text-7xl text-5xl">months</span>
             </div>
             <div className="flex gap-2 items-center">
-              <span className="text-[#854dff] text-7xl">
+              <span className="text-[#854dff] lg:text-7xl text-5xl">
                 {elapsed.days ? elapsed.days : '- -'}
               </span>
-              <span className="text-7xl">days</span>
+              <span className="lg:text-7xl text-5xl">days</span>
             </div>
           </div>
         </div>
