@@ -3,7 +3,7 @@ import { Poppins } from 'next/font/google'
 
 const inter = Poppins({
   subsets: ['latin'],
-  weight: '400',
+  weight: '300',
 })
 
 export const metadata = {
