@@ -36,11 +36,6 @@ export default function Home() {
               if (monthsDiff < 0 || (monthsDiff === 0 && daysDiff < 0)) {
                 yearsDiff--
                 monthsDiff += 12
-                const prevMonthDays = daysInMonth(
-                  inputDate.getMonth() - 1,
-                  inputDate.getFullYear()
-                )
-                daysDiff += prevMonthDays
               }
 
               setElapsed({
