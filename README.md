@@ -12,9 +12,9 @@ This is a solution to the [Age calculator app challenge on Frontend Mentor](http
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
+
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
+
 
 
 
@@ -37,13 +37,13 @@ Users should be able to:
 
 ### Screenshot
 
-![](./app/assets/images/screenshot.jpg)
+![](./public/assets/images/screenshot.jpg)
 
 
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Solution](https://your-solution-url.com)
 - Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
 ## My process
