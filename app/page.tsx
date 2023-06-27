@@ -11,33 +11,42 @@ export default function Home() {
     months: undefined,
     years: undefined,
   })
+  const daysInMonth = (month: number, year: number): number => {
+    return new Date(year, month + 1, 0).getDate()
+  }
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-slate-100">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-slate-100 font-poppins">
         <div className="bg-white rounded-xl p-8">
           <form
-            onSubmit={(e: any) => {
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
               e.preventDefault()
-              const formData = new FormData(e.target as HTMLFormElement)
+              const formData = new FormData(e.currentTarget)
               const { day, month, year } = Object.fromEntries(formData)
 
               const inputDate = new Date(`${year}-${month}-${day}`)
               const currentDate = new Date()
-              const diff = currentDate.getTime() - inputDate.getTime()
 
-              const elapsedYears = Math.floor(
-                diff / (1000 * 60 * 60 * 24 * 365)
-              )
-              const elapsedMonths =
-                Math.floor(diff / (1000 * 60 * 60 * 24 * 30) + 12) % 12
-              const elapsedDays =
-                Math.floor(diff / (1000 * 60 * 60 * 24) + 30) % 30
+              let yearsDiff =
+                currentDate.getFullYear() - inputDate.getFullYear()
+              let monthsDiff = currentDate.getMonth() - inputDate.getMonth()
+              let daysDiff = currentDate.getDate() - inputDate.getDate()
+
+              if (monthsDiff < 0 || (monthsDiff === 0 && daysDiff < 0)) {
+                yearsDiff--
+                monthsDiff += 12
+                const prevMonthDays = daysInMonth(
+                  inputDate.getMonth() - 1,
+                  inputDate.getFullYear()
+                )
+                daysDiff += prevMonthDays
+              }
 
               setElapsed({
-                days: elapsedDays,
-                months: elapsedMonths,
-                years: elapsedYears,
+                days: daysDiff,
+                months: monthsDiff,
+                years: yearsDiff,
               })
             }}
             className=" font-bold"
@@ -82,24 +91,24 @@ export default function Home() {
               </button>
             </div>
           </form>
-          <div className="flex flex-col gap-6 text-4xl font-extrabold ">
+          <div className="flex flex-col gap-6 text-xl font-extrabold ">
             <div className="flex gap-4 items-center">
-              <span className="text-purple-500">
+              <span className="text-purple-500 text-5xl">
                 {elapsed.years ? elapsed.years : '- -'}
               </span>
-              <span className="text-5xl font-extrabold">Years</span>
+              <span className="font-extrabold text-7xl italic">years</span>
             </div>
             <div className="flex gap-4 items-center">
-              <span className="text-purple-500">
+              <span className="text-purple-500 text-5xl">
                 {elapsed.months ? elapsed.months : '- -'}
               </span>
-              <span className="text-5xl font-extrabold ">Months</span>
+              <span className="text-7xl italic">months</span>
             </div>
             <div className="flex gap-4 items-center">
-              <span className="text-purple-500">
+              <span className="text-purple-500 text-5xl">
                 {elapsed.days ? elapsed.days : '- -'}
               </span>
-              <span className="text-5xl font-extrabold ">Days</span>
+              <span className="text-7xl italic ">days</span>
             </div>
           </div>
         </div>
