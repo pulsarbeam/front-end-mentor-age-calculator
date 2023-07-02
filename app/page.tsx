@@ -31,8 +31,10 @@ export default function Home() {
     }
 
     const inputDate = new Date(`${year}-${month}-${day}`)
+    inputDate.setUTCHours(0, 0, 0, 0) // Set time to 00:00:00
 
     const currentDate = new Date()
+    currentDate.setUTCHours(0, 0, 0, 0) // Set time to 00:00:00
 
     if (inputDate > currentDate || isNaN(inputDate.getTime())) {
       // Invalid date
@@ -50,7 +52,7 @@ export default function Home() {
 
     let yearsDiff = currentDate.getFullYear() - inputDate.getFullYear()
     let monthsDiff = currentDate.getMonth() - inputDate.getMonth()
-    let daysDiff = currentDate.getDate() - inputDate.getDate()
+    let daysDiff = Math.abs(currentDate.getDate() - inputDate.getDate()) // Use absolute difference
 
     if (monthsDiff < 0 || (monthsDiff === 0 && daysDiff < 0)) {
       yearsDiff--
